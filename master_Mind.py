@@ -17,6 +17,7 @@ def get_Feedback(secret, guess):
     # Count whites by subtracting black and calculating min digit frequency match
     secret_Counts = {}
     guess_Counts = {}
+    admin_Counts = {}
 
     for s, g in zip(secret, guess):
         if s != g:
@@ -35,6 +36,7 @@ def play_Mastermind():
     print("Guess the 4-digit code. Each digit is from 1 to 6. You have 10 attempts.")
     secret_Code = generate_Code()
     attempts = 10
+    adminPassword = 576
 
     for attempt in range(1, attempts + 1):
         guess = ""
@@ -44,7 +46,14 @@ def play_Mastermind():
             valid_Guess = len(guess) == 4 and all(c in "123456" for c in guess)
             if not valid_Guess:
                 print("Invalid input. Enter 4 digits, each from 1 to 6.")
-            show_Secret(secret_Code) if guess == "cheat" else False
+                if guess == "cheat":
+                    print("The command: 'cheat' is only available to admins, please enter the password:")
+                    password = int(input("Password: ").strip())
+                if password == adminPassword:
+                    show_Secret(secret_Code)
+                else:
+                    print("Incorrect password.")
+            
 
         black, white = get_Feedback(secret_Code, guess)
         print(f"Black pegs (correct position): {black}, White pegs (wrong position): {white}")
