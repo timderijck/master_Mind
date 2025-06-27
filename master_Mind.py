@@ -15,7 +15,7 @@ def generate_Code(length=4, digits=6):
 
 def get_Feedback(secret, guess):
     black_Pegs = sum(s == g for s, g in zip(secret, guess))
-    
+
     se_Co = {}
     gu_Co = {}
 
@@ -57,6 +57,7 @@ def play_Mastermind():
             return
 
     print(f"You've used all attempts. Right code was: {''.join(secret_Code)}")
+
 
 if __name__ == "__main__":
     again = 'Y'
